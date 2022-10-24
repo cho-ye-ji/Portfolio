@@ -1,0 +1,106 @@
+@charset "UTF-8";
+
+*{margin: 0; padding: 0;}
+body {
+    height: 100vh;
+    overflow: hidden;
+    background: #272831;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.card {
+    margin-top:50px;
+}
+.slick-slide img{
+    margin: 0 auto;
+    max-width: 240px;
+    /* width: 120px; height: 120px; */
+    border: 3px solid #fff;
+    border-radius: 50%;
+    margin-bottom: 25px
+    
+}
+.item{
+    padding: 15px;
+    outline: none;
+}
+.item-inner{
+    width: 50%; margin: 0 auto;
+    /* width: 50%; margin: 0 auto; 없었는데 생성 */
+    background:linear-gradient(45deg, #ff6600, #fff000);
+    border-radius: 18px;
+    text-align: center;
+    padding: 25px;
+}
+
+.item-inner h4{
+    font-size: 30px;
+    color: #fff;
+    text-transform: capitalize;
+}
+.item-inner p{
+    font: 16px; color: #fff;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+}
+.social{
+    margin-top: 50px;
+}
+.social a{
+     display: inline-block;
+     width: 45px; height: 45px;
+     line-height: 45px;
+     color: #ff8c00;
+     background: #fff; border-radius: 50%;
+     margin: 0 5px;
+     transition: all ease 0.5s;
+}
+.social a:hover{
+    transform: translateY(-10px);
+}
+/* background */
+.item2 .item-inner{
+    background:linear-gradient(45deg,  #db7eff, #ff6cc7);
+}
+.item3 .item-inner{
+    background:linear-gradient(45deg, #00c0ff, #5ad607);
+}
+.item4 .item-inner{
+    background:linear-gradient(45deg, #ffd200, #07d676);
+}
+.item5 .item-inner{
+    background:linear-gradient(45deg, #0b618a, #07d6b9);
+}
+/* icon */
+.item2 .social a{color: #0f5cff;}
+.item3 .social a{ color: #06c1ed;}
+.item4 .social a{ color: #f0d207;}
+.item5 .social a{ color:#f5cff;}
+
+
+/* arrow controla */
+.slick-slide{
+    transform: scale(0.8);
+    opacity: 0.3;
+    transition: all ease 0.5s;
+}
+.slick-slide.slick-current{
+    transform: scale(1);
+    opacity: 1;
+}
+
+.slick-arrow{
+    position: absolute;
+    bottom: 0;
+    z-index: 99;
+    background: #fff;
+    border: none;
+    padding: 8px 15px; border-radius: 50px;
+    width: 100px; outline: none;
+}
+.slick-next{ left: 52%;}
+.slick-prev{ left: 43%;}
+.slick-list{
+
+    padding-top: 55px !important;
+    padding-bottom: 55px !important;
+}

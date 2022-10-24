@@ -1,0 +1,197 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700|Josefin+Sans:400,600,700,400italic,600italic");
+
+*{  font-family: Arial, Helvetica, sans-serif;
+    margin: 0; padding: 0;}
+
+ /* 스크롤시 확대 효과 */
+
+/* .main{
+    width: 100vw;
+    height: 100vh;
+    background: #fff;
+    overflow: hidden;
+}
+.main .cont{
+    position: relative;
+    height: 100%;
+}
+.main_tit01, .main_tit02{
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    font-size: 250px;
+    line-height: 1;
+    transition: color 0.3s;
+    -webkit-text-stroke:1px #fff;
+}
+.main_tit01{
+    width: 100%; 
+    mix-blend-mode: screen;
+    z-index: 3;
+}
+.main_tit02{
+    width: 100%;
+    color: #141150;
+    z-index: 1;
+}
+.photozone{
+    position: absolute;
+    width: 50vw; height: 50vh;
+    left: 50%; top: 50%;
+    transform: translate(-50%,-50%);
+    background: #fff;
+    background-size: 100vw;
+    transition: 0.5s; overflow: hidden;
+    z-index: 2;
+}
+.photozone.on{
+    opacity: 0.8;
+    transition: all 1s;
+}
+.photozone.on::after{
+    content: "";
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0; left: 0;
+    backdrop-filter: blur(10px);
+}
+
+.photozone video{ 
+    position:absolute; 
+    top:50%; left:50%; 
+    transform:translate(-50%,-50%); 
+} */
+
+
+
+
+/* 세로 스크롤 */
+/* h2{
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: 0.8s;
+}
+h2.active{
+    transform: translateX(0);
+    opacity: 1;
+}
+
+div{
+    width: 100%; height: 100vh;
+    position: relative;
+}
+
+.image1{
+    background: url(https://cdn.pixabay.com/photo/2020/07/14/16/18/snow-5404785_960_720.jpg) no-repeat;
+    background-size: cover;
+   
+    background-attachment: fixed;
+}
+.image2{
+    background: url(https://cdn.pixabay.com/photo/2022/08/23/06/55/village-7405160_960_720.jpg) no-repeat;
+    
+    background-attachment: fixed;
+    background-size: cover;
+}
+.image3{
+    
+    background: url(https://cdn.pixabay.com/photo/2022/08/30/15/33/nature-7421337_960_720.jpg) no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.text{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    text-align: center;
+    color: #fff;
+    
+    background: rgba(1, 1, 1, 0.6);
+    font-size: 0.9rem;
+    mix-blend-mode: screen;
+} */
+
+
+
+/* 스크롤 내리면 살짝 변경되는 마우스 휠 효과 */
+
+body{
+    font-family: 'josefin sans';
+    font-size: 16px;
+  }
+  .hero{
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 9;
+    transition: all 1.6s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+  .hero.scrolled{
+    transform: translate3d(0, -100%, 0) scale(.75);
+    opacity: 0;
+  }
+  .hero-inner{
+      background-image: url('https://images.unsplash.com/photo-1442188950719-e8a67aea613a?fit=crop&fm=jpg&h=975&q=80&w=1925');
+      background-size: cover;
+    background-position: center;
+    display: table;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+  }
+  .hero-title{
+    display: table-cell;
+    vertical-align: middle; 
+    text-align: center;
+  }
+  h1, h2, h3, h4, h5, h6{
+    font-family: montserrat;
+  }
+  .font-2{
+    font-family: 'josefin sans';
+    font-weight: 700;
+  }
+  .title{ letter-spacing: .3em; text-transform: uppercase; }
+  .text-light{ color: #fff }
+  .font-alt{
+    font-family: 'georgia';
+    font-style: italic;
+    color: #666;
+  }
+  .hero{
+    overflow: hidden;
+    z-index: 1;
+  }
+  .content{
+    position: relative;
+    background-color: #fff;
+    border-top: 10px solid black;
+    padding: 0; 
+    margin: 0;
+    transition: all 1.6s cubic-bezier(0.86, 0, 0.07, 1);
+    transform: translate3d(0, 20px, 0) scale(.75);
+    opacity: 0;
+  }
+  .content.scrolled{
+    transform: translate3d(0, 0, 0) scale(1); 
+    opacity: 1;
+  }
+  .sd{
+    color: #fff;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .sd:hover, .sd:focus{
+    color: #fff;
+    opacity: .7;
+    text-decoration: none;
+  }
+  

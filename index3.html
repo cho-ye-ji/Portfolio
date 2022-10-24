@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="./css/style02.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <!-- <link rel="stylesheet" href="./css/modal.css"> -->
+    <!-- <link rel="stylesheet" href="./css/modal02.css"> -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <script src="./js/modal.js"></script>
+    <title> Cho Yeji Portfolio </title>
+    <style>
+      /* 글자색 아이콘 색상 */
+      section[class ^= "animate__"]{
+        opacity: 0;
+      }
+    </style>
+    <script>
+        $(function(){
+            $('.navbar_toggleBtn').click(function(){
+                $('.navbar_menu').slideToggle();
+                $('.navbar_links').slideToggle();
+            });
+            $('.navbar_menu > li> a').click(function(){
+                $('.sub').slideToggle();
+            });
+
+            // Progress 부분
+            $('.containerPro').each(function(i){
+                var skill = $(this).find('.skills');
+                var percent = skill.text();
+                
+                // 각각 딜레이 할때
+                // skill.delay(i*1000).animate({'width':percent});
+                skill.delay(2000).animate({'width':percent});
+            });
+
+            // work modal & mouse hover event
+            //1. 갤러리 목록 안에 있는 a 요소 변수 선언
+            const g_list = $('.gallery_list01 > li > a');
+
+            //2. 목록에 마우스 오버하면 캡션 span 나오게 하기
+            g_list.mouseenter(function(){
+              $(this).find('span').stop().animate({'bottom':'0'},400);
+            });
+            g_list.mouseleave(function(){
+              $(this).find('span').stop().animate({'bottom':'-40px'},400);
+            });
+            //4. 목록(.gallery_list)에 마우스를 클릭하면 img의 주소값을 변수에 담아서 body태그 맨뒤에 출력 
+            g_list.click(function(){
+              let img_url = $(this).find('img').attr('src');
+              console.log(img_url);
+              
+              let modal01 =`
+              <div class="modal01">
+                <img src="${img_url}" alt="">
+                <span class="c_btn01">닫기</span>
+            </div>
+              `;
+
+            $('body').append(modal01);
+            //닫기
+            $('.c_btn01').click(function(){
+              $('.modal01').hide();
+            });
+            
+            });
+            // QnA
+            $('#qna dl > dt').click(function(){
+                
+                $(this).next().slideToggle();
+                $('dt').not(this).next().slideUp(300);
+                $('i.fa-solid').not(this).removeClass('on');
+              
+                //아무것도 선택되지 않거나 마우스가 떠나면 화살표 원상태로
+                // $(this).next().Show();
+                
+                $(this).next().css('border-top','1px solid #000');
+                
+                $(this).find('i.fa-solid').mouseover().toggleClass('on');
+                // $('#qna i.fa-solid').animate({'rotate':'180deg'},100);
+
+                return false;
+            });
+
+            // work 구간
+            $('.gallery_lnb01>ul>li:first-child').find('a').addClass('gallery_lnb_act');
+            
+            $('.gallery_lnb01>ul>li').click(function(){
+              // 기존에 적용된 클래스 서식 제거
+              $('$gallery_lnb01 a').remove('gallery_lnb_act');
+              // 2. 내가 선택한 목록에 자식만 a서식 적용
+              $(this).find('a').addClass('gallery_lnb_act');
+            });
+
+            // 각각 메뉴를 클릭시 해당하는 작품 사진만 서서히 보이게 한다.
+            const gtotal = $('.gallery_lnb01 li:first-child a');
+            const gproject = $('.gallery_lnb01 li:nth-child(2) a');
+            const gprocess = $('.gallery_lnb01 li:nth-child(3) a');
+            const gdesign = $('.gallery_lnb01 li:nth-child(4) a');
+            const gcoding = $('.gallery_lnb01 li:last-child a');
+
+            gtotal.click(function(){
+                $('.total').hide().show();
+            });
+
+            gproject.click(function(){
+              $('.total').hide();
+              $('.project').fadeIn();
+            });
+
+            gprocess.click(function(){
+              $('.total').hide();
+              $('.process').fadeIn();
+            });
+            gdesign.click(function(){
+              $('.total').hide();
+              $('.design').fadeIn();
+            });
+
+            gcoding.click(function(){
+              $('.total').hide();
+              $('.coding').fadeIn();
+            });
+
+
+            // 스크롤 이동
+            $('#m_nav>ul>li>a').click(function(event){
+              event.preventDefault();
+              $('html,body').animate({scrollTop:$(this.hash).offset().top},500);
+            });
+
+            $("#modal_open_btn").click(function(){
+                $("#modal").attr("style", "display:block");
+            });
+   
+            $("#modal_close_btn").click(function(){
+                $("#modal").attr("style", "display:none");
+            }); 
+
+        });
+        
+    </script>
+</head>
+<body>
+<!-- https://velog.io/@minbrother/%EB%B0%98%EC%9D%91%ED%98%95-%ED%97%A4%EB%8D%94-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EA%B8%B0%EB%B3%B8 -->
+<header id="header">
+  <div class="header_inner">
+      <div class="title">
+          <h1>
+              <small> Cho ye ji</small>
+              Portfolio
+          </h1>
+          <img src="./img/intro01.png" alt="photo" class="photo" >
+          <p>안녕하세요 조예지입니다.
+              - WEB DESIGN, PUBLISHING, UI/UX DESIGN, React </p>
+      </div>
+      <span><i class="fas fa-mouse"></i><br>Scroll</span>
+  </div>
+</header>
+
+<!-- 원형 -->
+<nav id="m_nav">
+    <ul>
+      <li> <span class="num">1</span> <a href="#header" title="Home"> Home </a></li>
+      <li> <span class="num">2</span> <a href="#aboutMe" title="About"> About </a></li>
+      <li> <span class="num">3</span> <a href="#transition" title="Transition"> Transition </a></li>
+      <li> <span class="num">4</span> <a href="#design" title="Design"> Design </a></li>
+      <li> <span class="num">5</span> <a href="#work" title="Publishing"> Work </a></li>
+      <li> <span class="num">6</span> <a href="#qna" title="Front-end"> Q&A </a></li>
+    </ul>
+</nav>
+
+<main>
+    <section id="aboutMe" data-aos="zoom-in" data-aos-duration="500" data-aos-offset="500" data-aos-delay="300" data-aos-once="true"
+    >
+        <h2> <span class="txtPoint">A</span>bout Me </h2>
+        <div class="box01">
+            <article class="about_imgBox">
+                <img src="./img/me.jpg" alt="내사진" >
+                <div data-lit-hue='60' data-lit-count='100' class='lit-container'> </div>
+                <!-- <img src="#" alt="" > -->
+                <h3>안녕하세요. <span>조예지</span> 입니다.</h3>
+                <!-- <p class="meLine"></p> -->
+                
+                <p> <i class="fa-sharp fa-solid fa-quote-left"></i> </p>
+                <p> <i class="fa-sharp fa-solid fa-quote-right"></i> </p>
+            </article>
+            <article class="about_txtBox">
+                <h3> 조예지 </h3>
+                <p> Tel : +82 10 8220 9370 </p>
+                <p> 1994.04.27 </p>
+                <p> E : wldi1097@naver.com </p>
+                <br/>
+
+                <div class="wrap" id="program">
+                  <h3>My Skills</h3>
+                  
+                  <p>포토샵</p>
+                  <div class="containerPro">
+                      <div class="skills ps">90%</div>
+                  </div>
+          
+                  <p>일러스트</p>
+                  <div class="containerPro">
+                      <div class="skills ai">90%</div>
+                  </div>
+          
+                  <p>HTML</p>
+                  <div class="containerPro">
+                      <div class="skills html">90%</div>
+                  </div>
+              
+                  <p>CSS</p>
+                  <div class="containerPro">
+                      <div class="skills css">80%</div>
+                  </div>
+              
+                  <p>JavaScript</p>
+                  <div class="containerPro">
+                      <div class="skills js">65%</div>
+                  </div>
+                  
+                  <p> jQuery </p>
+                  <div class="containerPro">
+                      <div class="skills jq">65%</div>
+                  </div>
+              
+                  <p>react</p>
+                  <div class="containerPro">
+                      <div class="skills react">25%</div>
+                 </div>
+          
+                 <p> Github , Figma, Excel 등 </p>
+                 <div class="containerPro">
+                     <div class="skills etc">50%</div>
+                </div>
+
+              </div>
+
+                <br/>
+
+                <h3> EDUCATION </h3>
+                <h4> 2013.03 ~ 2017.07 대구대학교 생활조형디자인학과 졸업 </h4>
+                <!-- <p> </p> -->
+                <h4> 2017.09~2018.04 모바일 앱&웹 디자인 컨텐츠 개발과정 </h4>
+                <p> 웹디자인, 앱&웹 개발을 위한 <br/>
+                  HTML,CSS, javascript, jqeury를 활용 훈련과정 </p>
+                <h4> 2022.06~2022.10 UIUX반응형(자바스크립트&제이쿼리)프론트엔드 </h4>
+                <p> UIUX반응형(자바스크립트&제이쿼리)프론트엔드(퍼블리셔) <br/>
+                    React 교육 이수 </p>
+            </article>
+         </div>
+    </section>
+
+    <script>
+      $( document ).ready( () => {
+          AOS.init();
+      });
+    </script>
+
+    <section id="transition">
+        <h2> <span class="txtPoint">T</span>ransition </h2>
+        <p class="plus"> HTML&CSS의 Transition 기능을 사용한 Hover effect 작업물 </p>
+        <div>
+        <figure class="transition1" data-aos="flip-up" data-aos-duration="500" data-aos-offset="100" data-aos-delay="100">
+            <img src="./img/hovereffect01.png" alt="hoverEffect" >
+            <h4> Galaxy </h4>
+            <ul>
+                <li></li>
+                <li></li>
+            </ul>
+            <p>
+                The Galaxy consists of 100 bilion stars<br>
+                We imagine that
+            </p>
+        </figure>
+        <figure class="transition2" data-aos="flip-up" data-aos-duration="500" data-aos-offset="100" data-aos-delay="200">
+            <img src="./img/hovereffect02.png" alt="hoverEffect2">
+            <h4> Paris </h4>
+            <p>
+                This article is about the capitalof<br>
+                We always miss those days
+            </p>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </figure>
+        <figure class="transition3" data-aos="flip-up" data-aos-duration="500" data-aos-offset="100" data-aos-delay="300">
+            <img src="./img/hovereffect03.png" alt="hoverEffect3">
+            <h4> Childhood </h4>
+            <p>
+                Everyone has childhood<br>
+                We always miss those days
+            </p>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </figure>
+        </div>
+    </section>
+
+    
+    <section id="web" data-aos="fade-down" data-aos-offset="300" data-aos-easing="ease"
+      data-aos-duration="2000" >
+      <!-- 1번 renewal -->
+      <h2> <span class="txtPoint">D</span>esign</h2>
+      <h3> 01</h3>
+      <div class="renewalImg webimg"></div>
+      <div class="renewalTxt webtxt">
+          <div class="renewalTxt2 webTxt2">
+              <h4> 리뉴얼 프로젝트 </h4>
+              <div class="renewalTxtBar"></div>
+              <p>
+                <span>참여인원 :</span> 총 2명( 2021년도 실무 ) <br/>
+                <span>기간 :</span> 2021.07~한달 반 <br/>
+                <span>본인 작업 내용 :</span><br/>
+                1) 기획안 작성<br/>
+                2) 추가 기능 퍼블리싱 및 오류 개선<br/>
+                3) 반응형 웹 페이지 작업<br/>
+                4) 디자인 작업(아이콘 및 배너) 
+              </p>
+          </div>
+          <div class="btnn">
+              <button type="button" id="modal_open_btn" class="btn">컨셉서보기</button>
+              <a href="https://cho-ye-ji.github.io/Landing_page01/" target="_blank">Web 들어가기</a>
+          </div>
+      </div>
+
+      <div id="modal">
+          <div class="modal_content2">
+            <h2> </h2>
+            <p> 리뉴얼 프로젝트 </p>
+            <div class="modal_img">
+              <img src="./img/HGrenewal02.jpg" alt="">
+            </div>
+            <button type="button" id="modal_close_btn">닫기</button>
+          </div>
+          <div class="modal_layer"></div>
+      </div>
+
+      <!-- 2번 -->
+      <h3> 02</h3>
+      <div class="casperImg webimg"></div>
+      <div class="casperTxt webtxt">
+          <div class="casperTxt2 webTxt2">
+              <h4><strong> CASPER </strong> 홈페이지 </h4>
+              <div class="casperTxtBar"></div>
+              <p>
+                <span>참여인원 :</span> 개인작업 <br/>
+                <span>작업 내용 :</span> 모달 띄우기, 메인 네비게이션,사이드 네비게이션, 클릭시 스크롤 페이지, 쿠키 플러그인 연결등의 작업으로 만든 캐스퍼 홈페이지 퍼블리싱<br/>
+              </p>
+          </div>
+          <div class="btnn">
+              <a href="./casper/index.html" target="_blank">Web 들어가기</a>
+          </div>
+      </div>
+
+      <div id="modal">
+          <div class="modal_content2">
+            <h2> 모달창 </h2>
+            <p> 모달창 입니다 </p>
+            <div class="modal_img">
+              <img src="./img/landing.jpg" alt="">
+            </div>
+            <button type="button" id="modal_close_btn">닫기</button>
+          </div>
+          <div class="modal_layer"></div>
+      </div>
+      <!-- 랜딩페이지 만들기 -->
+
+      <h3> 03</h3>
+      <div class="scImg webimg"></div>
+      <div class="scTxt webtxt">
+          <div class="scTxt2 webTxt2">
+              <h4><strong> 랜딩페이지 </strong> 만들기</h4>
+              <div class="scTxtBar"></div>
+              <p>
+                <span>참여인원 :</span> 개인작업 <br/>
+                <span>작업 내용 :</span> HTML,CSS,javascript를 이용한 다양한 효과의 랜딩 페이지<br/>
+              </p>
+          </div>
+          <div class="btnn">
+              <a href="https://cho-ye-ji.github.io/Landing_page01/" target="_blank">Web 들어가기</a>
+          </div>
+      </div>
+
+      <div id="modal">
+          <div class="modal_content2">
+            <h2> 모달창 </h2>
+            <p> 모달창 입니다 </p>
+            <div class="modal_img">
+              <img src="./img/landing.jpg" alt="">
+            </div>
+            <button type="button" id="modal_close_btn">닫기</button>
+          </div>
+          <div class="modal_layer"></div>
+      </div>
+
+      
+      <!-- 4번 리액트 -->
+      <h3> 04 </h3>
+      <div class="reactImg webimg"></div>
+      <div class="reactTxt webtxt">
+          <div class="reactTxt2 webTxt2">
+              <h4><strong> 리액트 </strong> Todolist </h4>
+              <div class="reactTxtBar"></div>
+              <p>
+                <span>참여인원 :</span> 개인작업 <br/>
+                <span>작업 내용 :</span> HTML,CSS,javascript를 이용한 다양한 효과의 랜딩 페이지<br/>
+              </p>
+          </div>
+          <div class="btnn">
+              <!-- <button type="button" id="modal_open_btn" class="btn">컨셉서보기</button> -->
+              <a href="https://cho-ye-ji.github.io/todo/" target="_blank">Web 들어가기</a>
+          </div>
+      </div>
+
+      <div id="modal">
+          <div class="modal_content2">
+            <h2> 모달창 </h2>
+            <p> 모달창 입니다 </p>
+            <div class="modal_img">
+              <img src="./img/todolistimg.jpg" alt="">
+            </div>
+            <button type="button" id="modal_close_btn">닫기</button>
+          </div>
+          <div class="modal_layer"></div>
+      </div>
+    </section>
+
+    <!-- 모달참고
+    https://stickode.tistory.com/97 -->
+    <section id="design">
+        <h2> <span class="txtPoint" >D</span>esign </h2>
+        <article>
+          <div class="slideText" >
+            <h4> 배너 디자인 </h4>
+            <p> 다양한 사용처별 컨텐츠 배너 디자인 작업</p>
+          </div>
+          <!-- https://eunhee-programming.tistory.com/166 > 참고-->
+          <div id="slideShow">
+            <ul class="slides">
+              <li><img src="./img/sl01.jpg" alt=""></li>
+              <li><img src="./img/sl02.jpg" alt=""></li>
+              <li><img src="./img/sl03.jpg" alt=""></li>
+              <li><img src="./img/sl04.jpg" alt=""></li>
+              <li><img src="./img/sl05.jpg" alt=""></li>
+              <li><img src="./img/sl06.jpg" alt=""></li>
+            </ul>
+            <p class="cotroller">
+              <!-- &lang: 왼쪽 방향 화살표 &rang: 오른쪽 방향 화살표 --> 
+              <span class="prev">&lang;</span> 
+              <span class="next">&rang;</span>
+            </p>
+          </div>
+          <script src="./js/effect01.js"></script>
+        </article>
+    </section>
+    
+    <script src="./js/deSlide.js">
+      // 배너 디자인 슬라이드
+    </script>
+
+    <!-- slickSlide -->
+    <section id="banner_card">
+
+    </section>
+
+    <section id="work" 
+    data-aos="fade-down" 
+    data-aos-offset="300" 
+    data-aos-easing="ease"
+    data-aos-duration="2000">
+      <h2> <span class="txtPoint">W</span>ork </h2>
+      <article id="gallery01">
+        <nav class="gallery_lnb01"> <!-- gnb는 메인할때-->
+          <ul>
+            <li><a href="javascript:void(0);" title="전체보기" > 전체보기 </a></li>
+            <li><a href="javascript:void(0);" title="프로젝트" > 프로젝트 </a></li>
+            <li><a href="javascript:void(0);" title="퍼블리싱"> 퍼블리싱 </a></li>
+            <li><a href="javascript:void(0);" title="디자인"> 디자인 </a></li>
+            <li><a href="javascript:void(0);" title="개발" > 개발 </a></li>
+          </ul>
+        </nav>
+    
+        <ul class="gallery_list01">
+          <li class="total project">
+            <a href="javascript:void(0);" title="프로젝트"><img src="./img/dvimg_530.jpg" alt=""><span> 리뉴얼 프로젝트 </span></a>
+          </li>
+          <li class="total design">
+            <a href="javascript:void(0);" title="디자인"><img src="./img/img2.jpg" alt=""><span> 디자인 </span>
+            </a>
+          </li>
+          <li class="total process">
+            <a href="javascript:void(0);" title="퍼블리싱"><img src="./img/outback02.jpg" alt=""><span> 아웃백 퍼블리싱 </span></a>
+          </li>
+          <li class="total design">
+            <a href="javascript:void(0);" title="디자인"><img src="./img/img4.jpg" alt=""><span> 디자인 </span></a>
+          </li>
+          <li class="total project">
+            <a href="javascript:void(0);" title="프로젝트"><img src="./img/img5.jpg" alt=""><span> 프로젝트 </span></a>
+          </li>
+          <li class="total process">
+            <a href="javascript:void(0);#" title="퍼블리싱"><img src="./img/apple04.jpg" alt=""><span> 애플 퍼블리싱 </span></a>
+          </li>
+          <li class="total design">
+            <a href="javascript:void(0);" title="디자인"><img src="./img/img7.jpg" alt=""><span> 디자인 </span></a>
+          </li>
+          <li class="total design">
+            <a href="javascript:void(0);" title="디자인"><img src="./img/img8.jpg" alt=""><span> 디자인 </span></a>
+          </li>
+          <li class="total process">
+            <a href="javascript:void(0);" title="퍼블리싱"><img src="./img/img9.jpg" alt=""><span> 퍼블리싱 </span></a>
+          </li>
+          <li class="total project">
+            <a href="javascript:void(0);" title="프로젝트"><img src="./img/img10.jpg" alt=""><span> 프로젝트</span></a>
+          </li>
+          <li class="total coding">
+            <a href="javascript:void(0);" title="개발"><img src="./img/todolistimg.jpg" alt=""><span> 리액트 일정관리 </span></a>
+          </li>
+          <li class="total coding">
+            <a href="javascript:void(0);" title="개발"><img src="./img/img12.jpg" alt=""><span> 개발 </span></a>
+          </li>
+        </ul>
+        <!-- 팝업 완료 후 해당 구간에 팝업 추가 -->
+      </article>
+    </section>
+
+    <!-- Q&A -->
+    <section id="qna">
+      
+        <article>
+          <h2> Q&A </h2>
+            <dl> 
+                <dt>간단한 자기소개 및 경력기술 <i class="fa-solid fa-angle-down"></i></dt>
+                <dd> 웹디자인 & 웹퍼블리싱 4년차 조예지입니다.<br/>
+                     처음에 디자이너로 시작을 했다가 이 분야에 좀 더 이해하고 싶다는 욕심이 생겨 코딩공부를 시작하게 되었고, <br/>
+                     제가 디자인한 공간을 직접 구현하는 것에 대한 성취감에 반해 꾸준히 코딩을 공부해오고 있습니다. <br>
+                     그간 경력 업무를 소개드리자면 직전 회사에서 퍼블리싱 업무는 카페24를 통해 홈페이지 유지 및 보수, 오류사항 개선을 하였고,<br/>
+                     업무기간 내에 홈페이지 리뉴얼을 진행한 적이 있는데, 리뉴얼 페이지 기획 및 UI 디자인, <br />
+                     추가 퍼블리싱 및 반응형 작업을 했습니다. <br/> 
+                     디자인으로는 온라인 전체 배너 디자인 및 프로모션, 컨텐츠 디자인 <br/>
+                     오프라인 다자인은 회사 굿즈와 인쇄물 디자인, 인쇄물 디자인 리뉴얼이 주된 업무였습니다.<br/>
+                </dd>
+                <dt> 가장 기억에 남는 프로젝트는? <i class="fa-solid fa-angle-down"></i></dt>
+                <dd> 고객님의 리뷰 입니다.<br>
+                </dd>
+                
+                <dt> 성격 장 단점 <i class="fa-solid fa-angle-down"></i></dt>
+                <dd> 제 성격은 활동적이고, 조직생활에서도 능동적으로 목표에 대응할 줄 알며 <br/>남을 잘 배려하는 면을 가지고 있다는 평을 받아왔습니다.<br/>
+                      특히, 초 중학생때 학급 회장/부회장 으로서의 경험은 사회생활을 하는데 있어서 많은 것들을 가르쳐주었는데 <br/>
+                      리더로서의 생활과 경험을 하면서 자연스럽게 리더쉽을 배양하였고, <br/>
+                      이러한 리더쉽을 바탕으로 업무시 유연하게 목표를 찾고, 팀원들을 이끌어 가는 등 <br/>회사 생활을 잘 적응해 나갈 수 있었던 것 같습니다.
+                </dd>
+                
+                <dt> 입사 후 포부 <i class="fa-solid fa-angle-down"></i></dt>
+                <dd> 저의 목표는 급변하는 IT 업계에 이해도가 높은 인재가 되는 것입니다. <br/>
+                     온라인 시장을 잘 이해하여 제가 만든 공간이 사용자 누구나 간편하게 이용할 수 있고 편리한 장소가 되었으면 좋겠습니다. <br/>
+                     부족한 부분은 잘 수용하여 고치고, 제 역량을 발휘하며, 늘 더 나은 성장을 위해 고민하며 발전하는 모습 보여드리겠습니다. 
+                </dd>
+            </dl>
+      </article> 
+      <article id="qnaSlide">
+        <!-- 슬라이드 -->
+        <div class="q_list">
+          <img src="./img/qna01.jpg" alt="">
+          <img src="./img/qna02.jpeg" alt="">
+          <img src="./img/qna03.jpg" alt="">
+        </div>
+        <!-- 원 btn -->
+        <div class="q_list_c_btn">
+          <ul>
+            <li class="on01"> &nbsp; </li>
+            <li> &nbsp; </li>
+            <li> &nbsp; </li>
+          </ul>
+        </div>
+
+        <ul class="btn02">
+          <li><i class="fa-solid fa-play"></i></li>
+          <li><i class="fa-solid fa-stop"></i></li>
+      </ul>
+
+      </article>
+    </section>
+    <script>
+ 
+    </script>
+    <!-- 추가구간 프로젝트(슬라이드) & 백 블러를 통해 추가될 부분 설명 하고 구간추가 -->
+</main>
+<!-- 푸터영역 -->
+  <footer>
+    <address>
+        copyright &copy; 2022 Cho ye ji, all rights reserved. <br />
+        본 사이트는 개인 포트폴리오 용도로 만들어졌습니다. <br />
+        <p>wldi1097@naver.com | +82 10-8220-9370 </p>
+        <!-- <button type="button"><a href="./email.html"> 이메일 보내기 </a></button>  -->
+        <p> 
+          <a href="https://github.com/cho-ye-ji"> 
+            <img src="./img/git02.jpg"> <br/>
+            깃허브 바로가기 
+          </a>
+        </p>
+    </address>
+</footer>
+
+
+</body>
+</html>
